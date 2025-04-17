@@ -44,7 +44,7 @@ export default function Sidebar() {
         link: "/admin/collection"
     },
     ]
-    return <section className="bg-white h-screen px-5 py-3 overflow-hidden md:w-[290px] flex flex-col gap-5 shadow-xl">
+    return <section className="bg-white h-screen px-5 py-3 overflow-hidden w-[290px] flex flex-col gap-5 shadow-xl">
         <div className="flex gap-3 pb-3 pt-4 justify-center">
             <img src="/logo-removebg-preview.png" alt="loho" className="h-7" />
             <h1 className="font-bold text-2xl">TRIGGER</h1>
