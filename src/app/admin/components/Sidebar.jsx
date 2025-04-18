@@ -1,6 +1,9 @@
+import { signOut } from "firebase/auth"
 import { Cat, Layers2, LayoutDashboard, LibraryBig, LogOut, ShoppingBag, ShoppingBasket, SquareUserRound, Star } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import toast from "react-hot-toast"
+import { auth } from "../../../../lib/firestore/firebase"
 
 export default function Sidebar() {
     const menuList = [{
@@ -55,7 +58,19 @@ export default function Sidebar() {
             })}
         </div>
         <div className="flex justify-center hover:bg-red-600 hover:text-white py-2 rounded-lg">
-            <button className="flex justify-center items-center gap-3"> <LogOut /> Logout</button>
+            <button
+             onClick={async()=>{
+                try {
+                    await toast.promise(signOut(auth),{
+                        error:(e) => e?.message,
+                        loading: 'Signing out',
+                        success: 'Signed out Successfully!!'
+                    })
+                } catch (error) {
+                    toast.error(error?.message);
+                }
+             }}
+             className="flex justify-center items-center gap-3"> <LogOut /> Logout</button>
         </div>
     </section>
 }
@@ -64,10 +79,10 @@ function Tab({ item }) {
     const pathname = usePathname();
     const isSelected = pathname === item?.link;
     return (
-            <Link href={item.link}>
-                <div className={`flex items-center gap-3 py-2 rounded-xl hover:bg-blue-400 px-4 font-semibold hover:text-white ease-soft-spring transition-all duration-300 ${isSelected ? "bg-blue-400 text-white" : "bg-white text-black"}`}>
-                    {item.icon} {item.name}
-                </div>
-            </Link>
+        <Link href={item.link}>
+            <div className={`flex items-center gap-3 py-2 rounded-xl hover:bg-blue-400 px-4 font-semibold hover:text-white ease-soft-spring transition-all duration-300 ${isSelected ? "bg-blue-400 text-white" : "bg-white text-black"}`}>
+                {item.icon} {item.name}
+            </div>
+        </Link>
     )
 }
