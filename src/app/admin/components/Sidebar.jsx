@@ -71,3 +71,5 @@ function Tab({ item }) {
             </Link>
     )
 }
+
+// updating the sidebar
