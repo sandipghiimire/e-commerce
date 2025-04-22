@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth"
-import { Cat, Layers2, LayoutDashboard, LibraryBig, LogOut, ShoppingBag, ShoppingBasket, SquareUserRound, Star } from "lucide-react"
+import { Cat, Layers2, LayoutDashboard, LibraryBig, LogOut, ShieldUser, ShoppingBag, ShoppingBasket, SquareUserRound, Star } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import toast from "react-hot-toast"
@@ -46,6 +46,11 @@ export default function Sidebar() {
         icon: <LibraryBig />,
         link: "/admin/collection"
     },
+    {
+        name: "Admins",
+        icon: <ShieldUser />,
+        link: "/admin/admins"
+    },
     ]
     return <section className="bg-white h-screen px-5 py-3 overflow-hidden w-[290px] flex flex-col gap-5 shadow-xl">
         <div className="flex gap-3 pb-3 pt-4 justify-center">
@@ -80,7 +85,7 @@ function Tab({ item }) {
     const isSelected = pathname === item?.link;
     return (
         <Link href={item.link}>
-            <div className={`flex items-center gap-3 py-2 rounded-xl hover:bg-blue-400 px-4 font-semibold hover:text-white ease-soft-spring transition-all duration-300 ${isSelected ? "bg-blue-400 text-white" : "bg-white text-black"}`}>
+            <div className={`flex items-center gap-3 py-2 rounded-xl px-4 font-semibold ease-soft-spring transition-all duration-300 ${isSelected ? "bg-blue-400 text-white" : "bg-white text-black"}`}>
                 {item.icon} {item.name}
             </div>
         </Link>

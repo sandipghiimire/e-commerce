@@ -2,11 +2,20 @@
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Link from "next/link"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { auth } from "../../../../lib/firestore/firebase";
+import { useAuth } from "../../../../context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function page() {
+    const {user} = useAuth();
+    const router = useRouter();
+    useEffect(()=>{
+        if(user){
+            router.push('/dashboard')
+        }
+    },[user])
     return (
         <main className="w-full flex justify-center items-center h-screen bg-slate-200">
             <section className="flex flex-col gap-3">

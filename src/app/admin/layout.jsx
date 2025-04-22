@@ -1,48 +1,42 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import Header from "./components/Header"
-import Sidebar from "./components/Sidebar"
-import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import AuthoContextProvider, { useAuth } from "../../../context/AuthContext"
+import AdminLayout from "./components/AdminLayout"
+import { useRouter } from "next/navigation";
+import { CircularProgress } from "@heroui/react";
 
 export default function Layout({ children }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const pathname = usePathname();
-    const sidebarRef = useRef(null);
+    return <AuthoContextProvider>
+        <AdminChecking>{children}</AdminChecking>
+    </AuthoContextProvider>
+}
 
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
+function AdminChecking({ children }) {
+    const { user, isLoading } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!user && !isLoading) {
+            router.push('/login')
+        }
+    }, [user, isLoading]);
+
+    if (isLoading) {
+        return (
+            <div className="h-screen w-screen flex justify-center items-center">
+                <CircularProgress />
+            </div>
+        )
     }
 
-    useEffect(() => {
-        toggleSidebar();
-    }, [pathname])
-
-    useEffect(() => {
-        function handleClickOutsideSidebar(event) {
-            if (sidebarRef.current && !sidebarRef?.current?.contains(event.target)) {
-                setIsOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutsideSidebar);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutsideSidebar);
-        }
-    }, []);
-
-    return <main className="flex">
-        <div className="hidden md:block">
-            <Sidebar />
+    if(!user){
+        return(
+            <div className="h-screen w-screen flex justify-center items-center">
+            <h1>Login first!!</h1>
         </div>
-        <div
-            ref={sidebarRef}
-            className={`fixed md:hidden ease-in-out transistion-all duration-400
-            ${isOpen ? "translate-x-0" : "-translate-x-[290px]"}`}>
-            <Sidebar />
-        </div>
-        <section className="flex-1 flex flex-col">
-            <Header toggleSidebar={toggleSidebar} />
-            <section className="flex-1 bg-slate-100 min-h-screen">{children}</section>
-        </section>
-    </main>
+        )
+    }
+
+    return <AdminLayout>{children}</AdminLayout>
 }
