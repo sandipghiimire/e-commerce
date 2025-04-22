@@ -1,4 +1,4 @@
-import { Cat, Layers2, LayoutDashboard, LibraryBig, LogOut, ShoppingBag, ShoppingBasket, SquareUserRound, Star } from "lucide-react"
+import { Cat, Layers2, LayoutDashboard, LibraryBig, LogOut, ShieldUser, ShoppingBag, ShoppingBasket, SquareUserRound, Star } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -43,6 +43,11 @@ export default function Sidebar() {
         icon: <LibraryBig />,
         link: "/admin/collection"
     },
+    {
+        name: "Admin User",
+        icon: <ShieldUser />,
+        link: "/admin/adminuser"
+    },
     ]
     return <section className="bg-white h-screen px-5 py-3 overflow-hidden md:w-[290px] flex flex-col gap-5 shadow-xl">
         <div className="flex gap-3 pb-3 pt-4 justify-center">
@@ -54,7 +59,7 @@ export default function Sidebar() {
                 return <Tab item={item} key={key}></Tab>
             })}
         </div>
-        <div className="flex justify-center hover:bg-red-600 hover:text-white py-2 rounded-lg">
+        <div className="flex justify-center hover:bg-slate-300 hover:text bg-gray-200 py-2 rounded-lg">
             <button className="flex justify-center items-center gap-3"> <LogOut /> Logout</button>
         </div>
     </section>
@@ -64,12 +69,10 @@ function Tab({ item }) {
     const pathname = usePathname();
     const isSelected = pathname === item?.link;
     return (
-            <Link href={item.link}>
-                <div className={`flex items-center gap-3 py-2 rounded-xl hover:bg-blue-400 px-4 font-semibold hover:text-white ease-soft-spring transition-all duration-300 ${isSelected ? "bg-blue-400 text-white" : "bg-white text-black"}`}>
-                    {item.icon} {item.name}
-                </div>
-            </Link>
+        <Link href={item.link}>
+            <div className={`flex items-center gap-3 py-2 rounded-xl px-4 font-semibold ease-soft-spring transition-all duration-300 ${isSelected ? "bg-blue-400 text-white" : "bg-white text-black"}`}>
+                {item.icon} {item.name}
+            </div>
+        </Link>
     )
 }
-
-// updating the sidebar
