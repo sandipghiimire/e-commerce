@@ -64,3 +64,59 @@ export async function GET(req) {
         return NextResponse.json({ message: "Failed to fetch categories" }, { status: 500 });
     }
 }
+
+
+
+export async function DELETE(req, { params }) {
+    const { id } = params;
+
+    // Validate ID format
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return NextResponse.json(
+            { message: "Invalid category ID format" },
+            { status: 400 }
+        );
+    }
+
+    try {
+        await connectionDB();
+
+        const deletedCategory = await categoriesSchema.findByIdAndDelete(id);
+        
+        if (!deletedCategory) {
+            return NextResponse.json(
+                { message: "Category not found" },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json(
+            { 
+                message: "Category deleted successfully",
+                deletedId: deletedCategory._id 
+            },
+            { status: 200 }
+        );
+
+    } catch (error) {
+        console.error("Error deleting category:", error);
+        
+        // Handle specific MongoDB errors
+        if (error instanceof mongoose.Error.CastError) {
+            return NextResponse.json(
+                { message: "Invalid category ID format" },
+                { status: 400 }
+            );
+        }
+
+        return NextResponse.json(
+            { 
+                message: "Internal server error",
+                error: process.env.NODE_ENV === 'development' 
+                    ? error.message 
+                    : undefined 
+            },
+            { status: 500 }
+        );
+    }
+}
