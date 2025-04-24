@@ -53,51 +53,25 @@ export default function ListView() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden w-full">
+    <div className="rounded-lg shadow-sm overflow-hidden w-full">
       {/* Header */}
-      <div className="p-4 grid grid-cols-3 gap-4 items-center bg-slate-200">
-        <h3 className="font-semibold text-black">Icon</h3>
-        <h3 className="font-semibold text-black">Name</h3>
-        <h3 className="font-semibold text-black">Slug</h3>
+      <div className="grid grid-cols-4 gap-4 items-center border-separate">
+        <h3 className="font-semibold text-black px-3 py-2 bg-white">SN</h3>
+        <h3 className="font-semibold text-black px-3 py-2 bg-white">Icon</h3>
+        <h3 className="font-semibold text-black px-3 py-2 bg-white">Name</h3>
+        <h3 className="font-semibold text-black px-3 py-2 bg-white">Action</h3>
       </div>
 
       {/* Content */}
-      <div className="divide-y divide-gray-100">
-        {categories.length === 0 ? (
-          <div className="p-6 text-center text-gray-500">
-            No categories found
-          </div>
-        ) : (
-          categories.map((cat) => (
-            <div
-              key={cat._id}
-              className="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-100 transition-colors"
-            >
-              {/* Image with error handling */}
-              <div className="flex items-center">
-                {cat.image ? (
-                  <img
-                    src={cat.image}
-                    alt={cat.name}
-                    className="w-10 h-10 rounded-lg object-cover border"
-                    onError={(e) => {
-                      e.target.src = '/placeholder.svg';
-                      e.target.classList.add('bg-gray-100');
-                    }}
-                  />
-                ) : (
-                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
-                    <span className="text-gray-400 text-xs">No image</span>
-                  </div>
-                )}
-              </div>
-
-              <p className="font-medium text-gray-800 truncate">{cat.name}</p>
-              <p className="text-sm text-gray-500 truncate">{cat.slug}</p>
+      {categories?.map((items, index)=>{
+        return (
+            <div className="grid grid-cols-4 p-5">
+                {index+1}
+                <p>{items.image}</p>
+                <p>{items.name}</p>
             </div>
-          ))
-        )}
-      </div>
+        )
+      })}
     </div>
   );
 }
