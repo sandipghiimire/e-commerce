@@ -24,7 +24,7 @@ function AdminChecking({ children }) {
 
     if (isLoading) {
         return (
-            <div className="h-screen w-screen flex justify-center items-center">
+            <div className="h-full w-full flex justify-center items-center">
                 <CircularProgress />
             </div>
         )
@@ -32,7 +32,7 @@ function AdminChecking({ children }) {
 
     if(!user){
         return(
-            <div className="h-screen w-screen flex justify-center items-center">
+            <div className="h-full w-full flex justify-center items-center">
             <h1>Login first!!</h1>
         </div>
         )
