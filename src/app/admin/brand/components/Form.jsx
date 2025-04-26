@@ -14,7 +14,7 @@ export default function Form() {
             formData.append("slug", slug);
             formData.append("image", image);
 
-            const res = await fetch("/api/categories", {
+            const res = await fetch("/api/brand", {
                 method: "POST",
                 body: formData,
             });
@@ -22,7 +22,7 @@ export default function Form() {
             const result = await res.json();
             if (res.ok) {
                 console.log("✅ Category created:", result);
-                toast.success("Categories Created Successfully!!")
+                toast.success("brand Created Successfully!!")
                 setImages(null)
                 setName(null)
                 setSlug(null)
@@ -36,7 +36,7 @@ export default function Form() {
     };
 
     return <div className="bg-white rounded-lg p-5 w-ful md:w-[400px]">
-        <h1 className="font-semibold pb-2 flex justify-center items-center">Create Categories</h1>
+        <h1 className="font-semibold pb-2 flex justify-center items-center">Create brand</h1>
         <form
             onSubmit={(e) => {
                 e.preventDefault();
@@ -76,20 +76,6 @@ export default function Form() {
                     name="category-name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="border px-4 py-2 rounded-lg w-full focus:outline-none"
-                />
-            </div>
-            <div className="flex flex-col gap-1">
-                <label className="text-slate-600">
-                    Slug <span className="text-red-600">*</span>
-                </label>
-                <input
-                    type="text"
-                    placeholder="Enter category slug"
-                    id="category-slug"
-                    name="category-slug"
-                    value={slug}
-                    onChange={(e) => setSlug(e.target.value)}
                     className="border px-4 py-2 rounded-lg w-full focus:outline-none"
                 />
             </div>

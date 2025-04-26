@@ -5,36 +5,36 @@ import toast from "react-hot-toast";
 import { Edit2, Loader2, Trash2, Trash2Icon } from "lucide-react";
 
 export default function ListView() {
-    const [categories, setCategories] = useState([]);
+    const [brand, setbrand] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchCategories = async () => {
+    const fetchbrand = async () => {
         setLoading(true);
         try {
-            const res = await fetch("/api/categories");
+            const res = await fetch("/api/brand");
             if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
             const data = await res.json();
             console.log(data)
-            setCategories(data);
+            setbrand(data);
             setError(null);
         } catch (err) {
             setError(err.message);
-            toast.error("Failed to load categories");
+            toast.error("Failed to load brand");
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchCategories();
+        fetchbrand();
     }, []);
 
     if (loading) {
         return (
             <div className="flex justify-center items-center h-64">
                 <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
-                <span className="sr-only">Loading categories...</span>
+                <span className="sr-only">Loading brand...</span>
             </div>
         );
     }
@@ -44,7 +44,7 @@ export default function ListView() {
             <div className="text-center p-8">
                 <p className="text-red-500 mb-4">Error: {error}</p>
                 <button
-                    onClick={fetchCategories}
+                    onClick={fetchbrand}
                     className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
                 >
                     Retry
@@ -56,7 +56,7 @@ export default function ListView() {
     async function deleteData(id) {
         if (!confirm("Do you want to delete this user?")) return;
         try {
-            const response = await fetch("/api/categories", {
+            const response = await fetch("/api/brand", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -64,8 +64,8 @@ export default function ListView() {
                 body: JSON.stringify({ id }),
             });
             const data = await response.json();
-            alert("Deleted successfully!");
-            fetchCategories(id); // Refresh list after delete
+            toast.success("Deleted successfully!");
+            fetchbrand(id); // Refresh list after delete
         } catch (error) {
             console.log("Error deleting user!", error);
         }
@@ -83,7 +83,7 @@ export default function ListView() {
             </div>
 
             {/* Content */}
-            {categories?.map((items, index) => {
+            {brand?.map((items, index) => {
                 return (
                     <div className="grid grid-cols-4 overflow-hidden">
                         <p className="bg-white px-6 py-2">{index + 1}</p>

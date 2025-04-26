@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import categoriesSchema from "../../lib/models/categories/categoriesSchema";
 import connectionDB from "../../lib/db";
 import path from "path";
 import { promises as fs } from "fs";
 import { v4 as uuidv4 } from "uuid";
+import brandSchema from "../../lib/models/brand/brandSchema";
 
 export async function POST(req) {
     try {
@@ -39,7 +39,7 @@ export async function POST(req) {
 
         // 4. save to Mongo
         const imageUrl = `/uploads/${fileName}`;
-        const newCategory = await categoriesSchema.create({ name, slug, image: imageUrl });
+        const newCategory = await brandSchema.create({ name, slug, image: imageUrl });
 
         return NextResponse.json(newCategory, { status: 201 });
     } catch (error) {
@@ -57,7 +57,7 @@ export async function POST(req) {
 export async function GET(req) {
     try {
         await connectionDB(); // DB सँग connect गर्नुहोस्
-        const categories = await categoriesSchema.find(); // सबै categories खोज्नुहोस्
+        const categories = await brandSchema.find(); // सबै categories खोज्नुहोस्
         return NextResponse.json(categories, { status: 200 });
     } catch (error) {
         console.error("GET Error:", error);
@@ -71,7 +71,7 @@ export async function DELETE(req) {
   try {
       await connectionDB();
       const { id } = await req.json();
-      const response = await categoriesSchema.findByIdAndDelete(id);
+      const response = await brandSchema.findByIdAndDelete(id);
       return NextResponse.json({ message: "User deleted successfully!" }, { status: 200 })
   } catch (error) {
       return NextResponse.json({ message: "Error while deleting the data!!", error }, { status: 400 })
