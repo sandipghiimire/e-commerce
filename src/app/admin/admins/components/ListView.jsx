@@ -64,7 +64,7 @@ export default function ListView() {
                 body: JSON.stringify({ id }),
             });
             const data = await response.json();
-            alert("Deleted successfully!");
+            toast.success("Deleted successfully!");
             fetchadmins(id); // Refresh list after delete
         } catch (error) {
             console.log("Error deleting user!", error);
