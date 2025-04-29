@@ -4,8 +4,10 @@ import Fields from "./components/formFields";
 import ImageFields from "./components/image";
 import Description from "./components/Description";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+    const router = useRouter();
     const [data, setData] = useState({
         title: "",
         description: "",
@@ -66,7 +68,7 @@ export default function Page() {
             if (res.ok) {
                 console.log("✅ Product Created Successfully", result);
                 toast.success("Product Created Successfully");
-
+                router.push("/admin/product");
                 // Reset form
                 setData({
                     title: "",
