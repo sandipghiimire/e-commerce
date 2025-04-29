@@ -50,6 +50,7 @@ export default function Fields({ data, handleData }) {
                     onChange={(e) => handleData("title", e.target.value)}
                     placeholder="Enter product name"
                     className="border ring-slate-200 px-4 py-3 rounded-lg"
+                    required
                 />
             </div>
 
@@ -61,27 +62,28 @@ export default function Fields({ data, handleData }) {
                     onChange={(e) => handleData("description", e.target.value)}
                     placeholder="Enter Product Description"
                     className="border px-4 py-3 rounded-lg outline-none"
+                    required
                 />
             </div>
 
             <div className="flex flex-col gap-1">
-                <h1> Categories <span className="text-red-600">*</span></h1> {/* Changed from Categories to Brand */}
+                <h1>Category <span className="text-red-600">*</span></h1>
                 <select
                     value={data?.categories ?? ""}
                     onChange={(e) => handleData("categories", e.target.value)}
                     className="border px-4 py-3 rounded-lg outline-none"
                 >
-                    <option value="">Select Brand</option>
-                    {categoriess.map((categories) => (
-                        <option value={categories._id} key={categories._id}>
-                            {categories.name}
+                    <option value="">Select Category</option>
+                    {categoriess.map((category) => (
+                        <option value={category._id} key={category._id}>
+                            {category.name}
                         </option>
                     ))}
                 </select>
             </div>
 
             <div className="flex flex-col gap-1">
-                <h1>Brand <span className="text-red-600">*</span></h1> {/* Changed from Categories to Brand */}
+                <h1>Brand <span className="text-red-600">*</span></h1>
                 <select
                     value={data?.brand ?? ""}
                     onChange={(e) => handleData("brand", e.target.value)}
@@ -96,6 +98,7 @@ export default function Fields({ data, handleData }) {
                 </select>
             </div>
 
+
             <div className="flex flex-col gap-1">
                 <h1>Stock<span className="text-red-600">*</span></h1>
                 <input
@@ -104,6 +107,7 @@ export default function Fields({ data, handleData }) {
                     onChange={(e) => handleData("stock", e.target.value)}
                     placeholder="Enter Number Of Stock"
                     className="border px-4 py-3 rounded-lg outline-none"
+                    required
                 />
             </div>
 
@@ -115,6 +119,7 @@ export default function Fields({ data, handleData }) {
                     onChange={(e) => handleData("sale", e.target.value)}
                     placeholder="Enter Price"
                     className="border px-4 py-3 rounded-lg outline-none"
+                    required
                 />
             </div>
 
@@ -126,6 +131,7 @@ export default function Fields({ data, handleData }) {
                     onChange={(e) => handleData("saleprice", e.target.value)}
                     placeholder="Enter Sale Price"
                     className="border px-4 py-3 rounded-lg outline-none"
+                    required
                 />
             </div>
 

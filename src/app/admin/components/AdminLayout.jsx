@@ -40,9 +40,9 @@ export default function AdminLayout({ children }) {
             ${isOpen ? "translate-x-0" : "-translate-x-[290px]"}`}>
             <Sidebar />
         </div>
-        <section className="flex-1 flex flex-col">
+        <section className="flex-1 flex flex-col min-h-screen overflow-hidden">
             <Header toggleSidebar={toggleSidebar} />
-            <section className="flex-1 bg-slate-100">{children}</section>
+            <section className="pt-15 flex-1 bg-slate-100">{children}</section>
         </section>
     </main>
 }
