@@ -33,6 +33,7 @@ export default function Form() {
         setImage(null);
         setName("");
         setSubtitle("");
+        setProducts([]);
         setSelectedProducts([]);
       } else {
         toast.error(result.message || "Please fill all required fields.");
