@@ -16,12 +16,12 @@ export default function Header(){
         },
     ];
     return(
-    <nav className="py-4 px-20 border-b flex items-center justify-between">
+    <nav className="px-20 flex items-center justify-between">
         <img className="h-9" src="/logo-removebg-preview.png" alt="logo" />
-        <div className="flex gap-3 items-center">
+        <div className="flex items-center ">
             {menuList?.map((items)=>{
                 return <Link href={items.link}>
-                    <button>{items?.name}</button>
+                    <button className="hover:bg-blue-600 hover:text-white hover:px-8 hover:py-5 px-8 py-5">{items?.name}</button>
                 </Link>
             })}
         </div>

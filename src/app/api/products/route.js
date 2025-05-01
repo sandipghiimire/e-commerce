@@ -25,6 +25,7 @@ export async function POST(req) {
         const stock = parseInt(formData.get("stock"));
         const sale = parseFloat(formData.get("sale") || 0);
         const saleprice = parseFloat(formData.get("saleprice") || 0);
+        const isFeature = formData.get("isFeature") === "true";
         
         const featureImageFile = formData.get("featureImage");
 
@@ -56,6 +57,7 @@ export async function POST(req) {
             stock,
             sale,
             saleprice,
+            isFeature,
             featureImage: `/product-images/${featureImageName}`,
             images: JSON.stringify(imagePaths),
         });

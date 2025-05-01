@@ -51,6 +51,10 @@ const productSchema = new mongoose.Schema(
         featureImage:{
             type: String,
             required: true
+        },
+        isFeature : {
+            type: Boolean,
+            default: false
         }
     }
 )
