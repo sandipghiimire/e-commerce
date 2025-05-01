@@ -18,6 +18,7 @@ export default function Page({ params }) {
     stock: 0,
     sale: 0,
     saleprice: 0,
+    isFeature: false,
   });
   const [existingFeatureImage, setExistingFeatureImage] = useState("");
   const [existingImages, setExistingImages] = useState([]);
@@ -41,6 +42,7 @@ export default function Page({ params }) {
             stock: result.stock,
             sale: result.sale,
             saleprice: result.saleprice,
+            isFeature: result.isFeature,
           });
           setExistingFeatureImage(result.featureImage || "");
           setExistingImages(Array.isArray(result.images) ? result.images : []);

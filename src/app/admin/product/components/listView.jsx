@@ -113,61 +113,69 @@ export default function ListView() {
 
                 {/* Content */}
                 <tbody>
-                {currentProducts?.map((items, index) => (
-                    <tr key={items._id} className="overflow-hidden">
-                    <td className="bg-white px-6 py-2">{index + 1}</td>
-                    <td className="bg-white px-3 py-2">
-                        {items.featureImage ? (
-                            <img
-                                src={items.featureImage}
-                                alt={items.title}
-                                className="w-10 h-10 mt-3 rounded object-cover"
-                            />
-                        ) : (
-                            <div className="w-10 h-10 bg-gray-200 rounded" />
-                        )}
-                    </td>
-                    <td className="bg-white pr-5 py-2 whitespace-nowrap">{items.title}</td>
-                    <td className="bg-white px-3 py-2">
-                        <div className="flex gap-3 items-center">
-                            {items?.sale > items?.saleprice && (
-                                <p className="font-extralight text-sm text-slate-400 line-through whitespace-nowrap">
-                                    रु {items.sale}
-                                </p>
-                            )}
-                            <p className="whitespace-nowrap">रु {items.saleprice}</p>
-                        </div>
-                    </td>
-                    <td className="bg-white px-6 py-2">{items.stock}</td>
-                    <td className="bg-white px-6 py-2">{items?.orders ?? 0}</td>
-                    <td className="bg-white px-3 py-2">
-                        <div className="flex">
-                            {items?.stock - (items?.orders ?? 0) > 0 ? (
-                                <span className="bg-green-100 text-xs text-green-500 font-bold rounded-lg px-2 py-1 whitespace-nowrap">
-                                    Available
-                                </span>
-                            ) : (
-                                <span className="bg-red-100 text-xs text-red-500 font-bold rounded-lg px-2 py-1 whitespace-nowrap">
-                                    Out of Stock
-                                </span>
-                            )}
-                        </div>
-                    </td>
-                    <td className="bg-white px-3 py-2">
-                        <div className="flex">
-                            <button className="bg-blue-600 mr-3 px-4 py-2 text-white rounded-lg">
-                                <Link href={`/admin/product/${items._id}`}><Edit2 className="w-5 h-5" /></Link>
-                            </button>
-                            <button
-                                className="bg-red-600 px-4 py-2 text-white rounded-lg"
-                                onClick={() => deleteData(items._id)}
-                            >
-                                <Trash2Icon className="w-5 h-5" />
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                ))}
+                    {currentProducts?.map((items, index) => (
+                        <tr key={items._id} className="overflow-hidden">
+                            <td className="bg-white px-6 py-2">{index + 1}</td>
+                            <td className="bg-white px-3 py-2">
+                                {items.featureImage ? (
+                                    <img
+                                        src={items.featureImage}
+                                        alt={items.title}
+                                        className="w-10 h-10 mt-3 rounded object-cover"
+                                    />
+                                ) : (
+                                    <div className="w-10 h-10 bg-gray-200 rounded" />
+                                )}
+                            </td>
+                            <td className="bg-white pr-5 py-2 whitespace-nowrap">
+                                {items.title}
+                                {items?.isFeature && (
+                                    <span className="ml-2 inline-block bg-purple-900 text-white text-xs px-2 py-1 rounded">
+                                        Feature
+                                    </span>
+                                )}
+                            </td>
+
+                            <td className="bg-white px-3 py-2">
+                                <div className="flex gap-3 items-center">
+                                    {items?.sale > items?.saleprice && (
+                                        <p className="font-extralight text-sm text-slate-400 line-through whitespace-nowrap">
+                                            रु {items.sale}
+                                        </p>
+                                    )}
+                                    <p className="whitespace-nowrap">रु {items.saleprice}</p>
+                                </div>
+                            </td>
+                            <td className="bg-white px-6 py-2">{items.stock}</td>
+                            <td className="bg-white px-6 py-2">{items?.orders ?? 0}</td>
+                            <td className="bg-white px-3 py-2">
+                                <div className="flex">
+                                    {items?.stock - (items?.orders ?? 0) > 0 ? (
+                                        <span className="bg-green-100 text-xs text-green-500 font-bold rounded-lg px-2 py-1 whitespace-nowrap">
+                                            Available
+                                        </span>
+                                    ) : (
+                                        <span className="bg-red-100 text-xs text-red-500 font-bold rounded-lg px-2 py-1 whitespace-nowrap">
+                                            Out of Stock
+                                        </span>
+                                    )}
+                                </div>
+                            </td>
+                            <td className="bg-white px-3 py-2">
+                                <div className="flex">
+                                    <button className="bg-blue-600 mr-3 px-4 py-2 text-white rounded-lg">
+                                        <Link href={`/admin/product/${items._id}`}><Edit2 className="w-5 h-5" /></Link>
+                                    </button>
+                                    <button
+                                        className="bg-red-600 px-4 py-2 text-white rounded-lg"
+                                        onClick={() => deleteData(items._id)}
+                                    >
+                                        <Trash2Icon className="w-5 h-5" />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <div className="flex justify-between items-center mt-4 px-4">

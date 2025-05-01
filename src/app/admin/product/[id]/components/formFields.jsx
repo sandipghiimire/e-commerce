@@ -135,6 +135,20 @@ export default function Fields({ data, handleData }) {
                 />
             </div>
 
+            <div>
+                <p>Is Feature <span className="text-red-600">*</span></p>
+                <select
+                    value={data?.isFeature === true ? "true" : "false"}
+                    onChange={(e) => handleData("isFeature", e.target.value === "true")}
+                    name="isFeature"
+                    id="isFeature"
+                    className="border px-4 py-3 rounded-lg outline-none w-full"
+                >
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
         </section>
     )
 }

@@ -17,6 +17,7 @@ export async function PUT(request, { params }) {
             stock: Number(formData.get("stock")),
             sale: Number(formData.get("sale")),
             saleprice: Number(formData.get("saleprice")),
+            isFeature: formData.get("isFeature") === "true"
         };
 
         const updatedProduct = await Product.findByIdAndUpdate(id, data, {
