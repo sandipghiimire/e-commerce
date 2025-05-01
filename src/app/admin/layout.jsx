@@ -16,27 +16,27 @@ function AdminChecking({ children }) {
     const { user, isLoading } = useAuth();
     const router = useRouter();
 
-    useEffect(() => {
-        if (!user && !isLoading) {
-            router.push('/login')
-        }
-    }, [user, isLoading]);
+    // useEffect(() => {
+    //     if (!user && !isLoading) {
+    //         router.push('/login')
+    //     }
+    // }, [user, isLoading]);
 
-    if (isLoading) {
-        return (
-            <div className="h-full w-full flex justify-center items-center">
-                <CircularProgress />
-            </div>
-        )
-    }
+    // if (isLoading) {
+    //     return (
+    //         <div className="h-full w-full flex justify-center items-center">
+    //             <CircularProgress />
+    //         </div>
+    //     )
+    // }
 
-    if(!user){
-        return(
-            <div className="h-full w-full flex justify-center items-center">
-            <h1>Login first!!</h1>
-        </div>
-        )
-    }
+    // if(!user){
+    //     return(
+    //         <div className="h-full w-full flex justify-center items-center">
+    //         <h1>Login first!!</h1>
+    //     </div>
+    //     )
+    // }
 
     return <AdminLayout>{children}</AdminLayout>
 }

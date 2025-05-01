@@ -133,12 +133,12 @@ export default function Form() {
         {selectedProducts.length > 0 && (
           <div className="flex flex-col gap-1">
             <h2 className="text-slate-600 font-medium">Selected Products:</h2>
-            <ul className="list-disc list-inside">
+            <div className="flex flex-wrap gap3">
               {selectedProducts.map(id => {
                 const prod = products.find(p => p._id === id);
-                return <li key={id}>{prod ? prod.title : id}</li>;
+                return <p className="inline-flex mr-2 bg-blue-600 px-2 text-white rounded-xl mb-2" key={id}>{prod ? prod.title : id}</p>;
               })}
-            </ul>
+            </div>
           </div>
         )}
 
