@@ -21,7 +21,7 @@ export default function Header(){
         <div className="flex items-center ">
             {menuList?.map((items)=>{
                 return <Link href={items.link}>
-                    <button className="hover:bg-blue-600 hover:text-white hover:px-8 hover:py-5 px-8 py-5">{items?.name}</button>
+                    <button className="hover:bg-blue-600 hover:text-white hover:px-8 hover:py-2 hover:rounded-lg px-8 py-5">{items?.name}</button>
                 </Link>
             })}
         </div>
