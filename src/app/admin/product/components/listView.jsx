@@ -18,7 +18,7 @@ export default function ListView() {
             const res = await fetch("/api/products");
             if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
             const data = await res.json();
-            console.log(data)
+            // console.log(data)
             setProduct(data);
             setError(null);
         } catch (err) {
@@ -32,6 +32,7 @@ export default function ListView() {
     useEffect(() => {
         fetchbrand();
     }, []);
+    
 
     // Pagination calculations
     const totalPages = Math.ceil(product.length / itemsPerPage);
