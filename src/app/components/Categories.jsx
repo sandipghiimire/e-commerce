@@ -64,10 +64,12 @@ export default function Categories() {
                         <Link href={'/'}>
                             <div className="px-2">
                                 <div className="flex flex-col gap-4 items-center justify-center">
-                                    <div className="h-32 w-32 rounded-full p-5 overflow-hidden">
-                                        <img src={categorie?.image} alt={categorie?.image} />
-                                    </div>
-                                    <h1 className="font-semibold">{categorie?.name}</h1>
+                                    <Link href={`/categories/${categorie?._id}`}>
+                                        <div className="h-32 w-32 rounded-full p-5 overflow-hidden">
+                                            <img src={categorie?.image} alt={categorie?.image} />
+                                        </div>
+                                        <h1 className="font-semibold">{categorie?.name}</h1>
+                                    </Link>
                                 </div>
                             </div>
                         </Link>

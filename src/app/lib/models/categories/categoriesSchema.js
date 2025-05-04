@@ -12,4 +12,5 @@ const categoriesSchema = new mongoose.Schema({
     image:  { type: String, required: true }
 });
 
-module.exports =mongoose.models.Category || mongoose.model("Category", categoriesSchema);
+const Category = mongoose.models.Category || mongoose.model("Category", categoriesSchema);
+export default Category;
