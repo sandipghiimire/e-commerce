@@ -14,7 +14,9 @@ export default function Header() {
 
     return (
         <nav className="px-6 md:px-20 py-4 flex items-center justify-between shadow-md bg-white">
+            <Link href={'/'}><div className="flex justify-center items-center gap-1">
             <img className="h-9" src="/logo-removebg-preview.png" alt="logo" />
+            <h1 className="font-semibold hidden md:block">TRIGGER</h1></div></Link>
 
             {/* Desktop menu */}
             <div className="hidden md:flex items-center gap-4">

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
+import { Rating } from "@mui/material";
+import Link from "next/link";
+
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
@@ -40,10 +43,25 @@ export default function ProductList() {
                 </div>
               </div>
               <div className="mt-4 space-y-2">
-                <h3 className="font-semibold text-lg">{item?.title}</h3>
+                <Link href={`/products/${item?._id}`}><h3 className="font-semibold text-lg">{item?.title}</h3></Link>
+                <div>
+                  <h2 className="text-green-600">रु {item?.saleprice}{" "}
+                    <span className="line-through text-sm text-red-600">रु {item?.sale}</span>
+                  </h2>
+                </div>
                 <p className="text-sm text-gray-600 line-clamp-2">
                   {item?.description}
                 </p>
+                <div className='flex gap-3 items-center'>
+                  <Rating
+                    // size="small"
+                    name="product-rating"
+                    defalutVlaue={2.5}
+                    precision={0.5}
+                    readonly
+                  />
+                  <h1 className="text-gray-300 text-lg">(0)</h1>
+                </div>
                 <div className="flex items-center gap-2 pt-2">
                   <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">
                     Buy Now

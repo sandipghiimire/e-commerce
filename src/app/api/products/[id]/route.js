@@ -1,5 +1,7 @@
 import connectionDB from '../../../lib/db';
 import Product from '../../../lib/models/products/productSchema';
+import Brand from '../../../lib/models/brand/brandSchema';
+import Category from '../../../lib/models/categories/categoriesSchema';
 import { NextResponse } from 'next/server';
 
 export async function PUT(request, { params }) {
@@ -45,11 +47,10 @@ export async function GET(request, { params }) {
     await connectionDB();
 
     try {
-        const { id } = await params; // ✅ No await here
+        const { id } = await params;
         const product = await Product.findById(id)
             .populate('brand')
             .populate('categories');
-
         if (!product) {
             return NextResponse.json(
                 { error: "Product not found" },
@@ -57,7 +58,7 @@ export async function GET(request, { params }) {
             );
         }
 
-        return NextResponse.json( product ); // ✅ Return as an object
+        return NextResponse.json( product );
     } catch (error) {
         return NextResponse.json(
             { error: "Error fetching product", details: error.message },
