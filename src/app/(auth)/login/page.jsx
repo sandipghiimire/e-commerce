@@ -13,7 +13,7 @@ export default function page() {
     const router = useRouter();
     useEffect(()=>{
         if(user){
-            router.push('/dashboard')
+            router.push('/account')
         }
     },[user])
     return (

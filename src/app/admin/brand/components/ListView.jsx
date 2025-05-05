@@ -56,7 +56,7 @@ export default function ListView() {
     async function deleteData(id) {
         if (!confirm("Do you want to delete this user?")) return;
         try {
-            const response = await fetch("http/api/brand", {
+            const response = await fetch("/api/brand", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

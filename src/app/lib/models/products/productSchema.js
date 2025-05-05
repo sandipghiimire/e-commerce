@@ -11,6 +11,10 @@ const productSchema = new mongoose.Schema(
             type: String,
             // required: [true, 'Description is required']
         },
+        shortDescription: {
+            type: String,
+            // required: [true, 'Description is required']
+        },
         categories: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category',

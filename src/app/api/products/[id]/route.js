@@ -14,6 +14,7 @@ export async function PUT(request, { params }) {
         const data = {
             title: formData.get("title"),
             description: formData.get("description"),
+            shortDescription: formData.get("shortDescription"),
             categories: formData.get("categories"),
             brand: formData.get("brand"),
             stock: Number(formData.get("stock")),

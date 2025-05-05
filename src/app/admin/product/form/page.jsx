@@ -11,6 +11,7 @@ export default function Page() {
     const [data, setData] = useState({
         title: "",
         description: "",
+        shortDescription: "",
         categories: "",
         brand: "",
         stock: 0,
@@ -34,6 +35,7 @@ export default function Page() {
         const formData = new FormData();
         formData.append("title", data.title);
         formData.append("description", data.description);
+        formData.append("shortDescription", data.shortDescription);
         formData.append("categories", data.categories);
         formData.append("brand", data.brand);
         formData.append("stock", data.stock);
@@ -75,6 +77,7 @@ export default function Page() {
                 setData({
                     title: "",
                     description: "",
+                    shortDescription: "",
                     categories: "",
                     brand: "",
                     stock: 0,

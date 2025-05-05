@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react"; // or use any icon library
+import { Heart, Menu, Search, ShoppingCart, UserCircle2, X } from "lucide-react"; // or use any icon library
+import Logout from "./LogOut";
+import AuthoContextProvider from "../../../context/AuthContext";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,10 +15,10 @@ export default function Header() {
     ];
 
     return (
-        <nav className="px-6 md:px-20 py-4 flex items-center justify-between shadow-md bg-white">
+        <nav className="sticky top-0 z-50 bg-opacity-60 backdrop-blur-2xl px-6 md:px-20 py-4 flex items-center justify-between shadow-md bg-white">
             <Link href={'/'}><div className="flex justify-center items-center gap-1">
-            <img className="h-9" src="/logo-removebg-preview.png" alt="logo" />
-            <h1 className="font-semibold hidden md:block">TRIGGER</h1></div></Link>
+                <img className="h-9" src="/logo-removebg-preview.png" alt="logo" />
+                <h1 className="font-semibold hidden md:block">TRIGGER</h1></div></Link>
 
             {/* Desktop menu */}
             <div className="hidden md:flex items-center gap-4">
@@ -29,13 +31,30 @@ export default function Header() {
                 ))}
             </div>
 
-            {/* Desktop Login Button */}
-            <div className="hidden md:block">
-                <Link href="/login">
-                    <button className="bg-blue-600 px-5 py-2 rounded-full font-bold text-white">
-                        Login
+            <div className="flex items-center gap-3 md:gap-6">
+                <Link href={'/'}>
+                    <button title="Search Products" className="h-5 w-5 flex justify-center items-center rounded-full hover:bg-gray-50">
+                        <Search size={20} />
                     </button>
                 </Link>
+                <Link href={'/cart'}>
+                    <button title="My Cart" className="h-5 w-5 flex justify-center items-center rounded-full hover:bg-gray-50">
+                        <ShoppingCart size={20} />
+                    </button>
+                </Link>
+                <Link href={'/wishlist'}>
+                    <button title="Wishlist" className="h-5 w-5 flex justify-center items-center rounded-full hover:bg-gray-50">
+                        <Heart size={20} />
+                    </button>
+                </Link>
+                <Link href={'/account'}>
+                    <button title="My Account" className="h-5 w-5 flex justify-center items-center rounded-full hover:bg-gray-50">
+                        <UserCircle2 size={20} />
+                    </button>
+                </Link>
+                <AuthoContextProvider> 
+                    <Logout />
+                </AuthoContextProvider>
             </div>
 
             {/* Mobile Login Button */}
