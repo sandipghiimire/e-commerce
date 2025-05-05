@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Slider from "react-slick";
@@ -39,8 +40,10 @@ export default function SimpleSlider() {
                                 {/* Left Side - Text Section */}
                                 <div className="flex-1 flex flex-col gap-4 md:text-left">
                                     <h2 className="text-gray-600 text-sm uppercase hidden md:block">LATEST FAVORITE</h2>
-                                    <h1 className="text-3xl md:text-4xl font-semibold">{items?.title}</h1>
-                                    <p className="text-sm font-light max-w-md mx-auto md:mx-0 line-clamp-2">{items?.description}</p>
+                                    <Link href={`/products/${items?._id}`}>
+                                        <h1 className="text-3xl md:text-4xl font-semibold">{items?.title}</h1>
+                                    </Link>
+                                    <p className="text-sm font-light max-w-md mx-auto md:mx-0 line-clamp-2">{items?.shortDescription}</p>
 
                                     {/* Action Buttons */}
                                     <div className="flex flex-wrap justify-start gap-3 mt-4">
@@ -54,11 +57,13 @@ export default function SimpleSlider() {
 
                                 {/* Right Side - Image */}
                                 <div className="flex justify-center items-center mt-6 md:mt-0">
-                                    <img
-                                        className="h-60 md:h-[25rem] xl:h-[25rem] w-auto object-cover rounded-lg"
-                                        src={items?.featureImage}
-                                        alt=""
-                                    />
+                                    <Link href={`/products/${items?._id}`}>
+                                        <img
+                                            className="h-60 md:h-[25rem] xl:h-[25rem] w-auto object-cover rounded-lg"
+                                            src={items?.featureImage}
+                                            alt=""
+                                        />
+                                    </Link>
                                 </div>
                             </div>
                         </div>

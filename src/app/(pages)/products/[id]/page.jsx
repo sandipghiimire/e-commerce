@@ -49,9 +49,9 @@ export default function ProductPage() {
                 <Details details={product} />
             </section>
             <div>
-                <div>
-{/* <Review/> */}
-<RelatedProducts categories={product?.categories?._id}/>
+                <div className="pt-10">
+                    {/* <Review/> */}
+                    <RelatedProducts categories={product?.categories?._id} />
                 </div>
             </div>
 

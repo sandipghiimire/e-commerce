@@ -58,8 +58,8 @@ export default function Fields({ data, handleData }) {
                 <h1>Product Description <span className="text-red-600">*</span></h1>
                 <input
                     type="text"
-                    value={data?.description ?? ""}
-                    onChange={(e) => handleData("description", e.target.value)}
+                    value={data?.shortDescription ?? ""}
+                    onChange={(e) => handleData("shortDescription", e.target.value)}
                     placeholder="Enter Product Description"
                     className="border px-4 py-3 rounded-lg outline-none"
                     required

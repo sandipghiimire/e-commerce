@@ -28,9 +28,9 @@ export default function ProductList() {
       </div>
       <div className="w-full flex justify-center pt-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products?.map((item) => (
+          {products?.map((item, index) => (
             <div
-              key={item.id}
+              key={index}
               className="bg-white rounded-xl shadow-lg hover:shadow-lg p-4 transition duration-300 w-72"
             >
               <div className="relative flex items-center justify-center">
@@ -39,19 +39,20 @@ export default function ProductList() {
                   alt={item?.title}
                   className="h-40 object-contain"
                 />
-                <div className="absolute top-2 right-2 bg-pink-100 p-2 rounded-full cursor-pointer">
+                <button 
+                  className="absolute top-2 right-2 bg-pink-100 p-2 rounded-full cursor-pointer">
                   <Heart size={18} className="text-pink-600" />
-                </div>
+                </button>
               </div>
               <div className="mt-4 space-y-2">
-                <Link href={`/products/${item?._id}`}><h3 className="font-semibold text-lg">{item?.title}</h3></Link>
+                <Link href={`/products/${item?._id}`}><h3 className="font-semibold text-lg line-clamp-2">{item?.title}</h3></Link>
                 <div>
                   <h2 className="text-green-600">रु {item?.saleprice}{" "}
                     <span className="line-through text-sm text-red-600">रु {item?.sale}</span>
                   </h2>
                 </div>
                 <p className="text-sm text-gray-600 line-clamp-2">
-                  {item?.description}
+                  {item?.shortDescription}
                 </p>
                 <div className='flex gap-3 items-center'>
                   <Rating

@@ -20,6 +20,7 @@ export async function POST(req) {
         const formData = await req.formData();
         const title = formData.get("title");
         const description = formData.get("description");
+        const shortDescription = formData.get("shortDescription");
         const categories = formData.get("categories");
         const brand = formData.get("brand");
         const stock = parseInt(formData.get("stock"));
@@ -52,6 +53,7 @@ export async function POST(req) {
         const newProduct = await Product.create({
             title,
             description,
+            shortDescription,
             categories,
             brand,
             stock,

@@ -38,12 +38,12 @@ export default function RelatedProducts({ categories }) {
 
     return (
         <main>
-            <h2 className="text-xl font-semibold mb-4">Related Products</h2>
+            <h2 className="text-xl font-semibold mb-4 flex pl-5 md:pl-20">Related Products</h2>
             {related.length === 0 ? (
                 <p>No related products found.</p>
             ) : (
                 <div>
-                    <div className="w-full flex">
+                    <div className="w-full justify-center flex">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {related?.map((item) => (
                                 <div
@@ -61,14 +61,14 @@ export default function RelatedProducts({ categories }) {
                                         </div>
                                     </div>
                                     <div className="mt-4 space-y-2">
-                                        <Link href={`/products/${item?._id}`}><h3 className="font-semibold text-lg">{item?.title}</h3></Link>
+                                        <Link href={`/products/${item?._id}`}><h3 className="font-semibold text-lg line-clamp-2">{item?.title}</h3></Link>
                                         <div>
                                             <h2 className="text-green-600">रु {item?.saleprice}{" "}
                                                 <span className="line-through text-sm text-red-600">रु {item?.sale}</span>
                                             </h2>
                                         </div>
                                         <p className="text-sm text-gray-600 line-clamp-2">
-                                            {item?.description}
+                                            {item?.shortDescription}
                                         </p>
                                         <div className='flex gap-3 items-center'>
                                             <Rating
