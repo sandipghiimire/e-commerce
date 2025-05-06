@@ -21,6 +21,8 @@ export default function Logout() {
                         error: (e) => e?.message,
                         loading: 'Signing out',
                         success: 'Signed out Successfully!!'
+                    },{
+                        position: "bottom-right",
                     })
                 } catch (error) {
                     toast.error(error?.message);

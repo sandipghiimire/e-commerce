@@ -68,6 +68,11 @@ function SignInWithGoogleComponent() {
         setIsLoading(true);
         try {
             const user = await signInWithPopup(auth, new GoogleAuthProvider())
+            toast.success("Login Successfully!!", {
+                className:"bg-blue-600",
+                position: "bottom-right",
+              });
+              
         } catch (error) {
             toast.error(error?.message);
         }
