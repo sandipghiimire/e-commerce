@@ -36,7 +36,7 @@ function UserCheck({ children }) {
                 <div className="text-center">
                     <h1 className="mb-4 text-xl font-semibold">You are not Logged In!</h1>
                     <Link href="/login">
-                        <button className="bg-blue-600 px-4 py-1.5 rounded-full font-bold text-white text-sm">
+                        <button className="bg-blue-600 px-4 py-1.5 rounded-lg font-semibold text-white">
                             Login
                         </button>
                     </Link>

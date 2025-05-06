@@ -74,42 +74,69 @@ export default function ListView() {
 
     return (
         <div className="rounded-lg overflow-hidden w-full">
-            {/* Header */}
-            <div className="grid grid-cols-4 border-separate border-spacing-y-3 mb-2">
-                <h3 className="font-semibold text-black px-3 py-2 bg-white">SN</h3>
-                <h3 className="font-semibold text-black px-3 py-2 bg-white">Icon</h3>
-                <h3 className="font-semibold text-black px-3 py-2 bg-white">Name</h3>
-                <h3 className="font-semibold text-black px-3 py-2 bg-white">Action</h3>
-            </div>
+            <div className="overflow-x-auto">
+                <table className="w-full">
+                    {/* Header */}
+                    <thead className="bg-gray-50">
+                        <tr className="border-b border-gray-300">
+                            <th className="px-4 py-3 font-semibold text-black text-left">SN</th>
+                            <th className="px-4 py-3 font-semibold text-black text-left">Icon</th>
+                            <th className="px-4 py-3 font-semibold text-black text-left">Name</th>
+                            <th className="px-4 py-3 font-semibold text-black text-left">Action</th>
+                        </tr>
+                    </thead>
 
-            {/* Content */}
-            {admins?.map((items, index) => {
-                return (
-                    <div className="grid grid-cols-4 overflow-hidden">
-                        <p className="bg-white px-6 py-2">{index + 1}</p>
-                        {/* <p className="bg-white px-6 py-2">{items.image}</p> */}
-                        <p className="bg-white">
-                            {items.image ? (
-                                <img
-                                    src={items.image}
-                                    alt={items.name}
-                                    className="w-15 h-15 rounded-lg object-cover"
-                                />
-                            ) : (
-                                <div className="w-10 h-10 bg-gray-200 rounded" />
-                            )}
-                        </p>
-                        <p className="bg-white px-6 py-2"><div>
-                            <h1>{items.name}</h1> 
-                            <h3 className="font-extralight italic text-sm">{items.email}</h3>
-                            </div></p>
-                        <div className="bg-white  py-2">
-                            <button className="bg-blue-600 mr-3 px-4 py-2 text-white rounded-lg"><Edit2 className="w-5 h-5" /></button>
-                            <button className="bg-red-600 mr-3 px-4 py-2 text-white rounded-lg" onClick={()=>deleteData(items._id)}><Trash2Icon className="w-5 h-5" /></button>
-                        </div>
-                    </div>
-                )
-            })}
+                    {/* Scrollable Body */}
+                    <tbody className="divide-y divide-gray-100">
+                        {admins?.map((items, index) => (
+                            <tr key={items._id} className="hover:bg-gray-50 transition-colors">
+                                {/* SN */}
+                                <td className="px-4 py-3">{index + 1}</td>
+
+                                {/* Image */}
+                                <td className="px-4 py-2">
+                                    <div className="flex items-center">
+                                        {items.image ? (
+                                            <img
+                                                src={items.image}
+                                                alt={items.name}
+                                                className="w-12 h-12 rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-12 h-12 bg-gray-200 rounded-full" />
+                                        )}
+                                    </div>
+                                </td>
+
+                                {/* Name + Email */}
+                                <td className="px-4 py-2">
+                                    <h1 className="font-medium">{items.name}</h1>
+                                    <p className="text-sm text-gray-500 italic">{items.email}</p>
+                                </td>
+
+                                {/* Actions */}
+                                <td className="px-4 py-2">
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                                            aria-label="Edit"
+                                        >
+                                            <Edit2 className="w-5 h-5" />
+                                        </button>
+                                        <button
+                                            className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                                            onClick={() => deleteData(items._id)}
+                                            aria-label="Delete"
+                                        >
+                                            <Trash2Icon className="w-5 h-5" />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

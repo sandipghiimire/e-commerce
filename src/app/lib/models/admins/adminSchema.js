@@ -7,13 +7,22 @@ const adminSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        lowercase: true,
+        required: true,
+    },
+    number:{
+        type:String,
+        required: true,
+    },
+    password:{
+        type:String,
         required: true,
     },
     isAdmin: {
         type: Boolean,
-        default: true,
+        default: false,
     },
     image: { type: String, required: true }
 });
 
-module.exports = mongoose.models.Admin || mongoose.model("Admins", adminSchema);
+module.exports = mongoose.models.Admins || mongoose.model("Admins", adminSchema);

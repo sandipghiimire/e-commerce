@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Rating } from "@mui/material";
 import Link from "next/link";
+import WishlistButton from "./WishlistButton";
 
 
 export default function ProductList() {
@@ -39,10 +40,7 @@ export default function ProductList() {
                   alt={item?.title}
                   className="h-40 object-contain"
                 />
-                <button 
-                  className="absolute top-2 right-2 bg-pink-100 p-2 rounded-full cursor-pointer">
-                  <Heart size={18} className="text-pink-600" />
-                </button>
+                <WishlistButton productId={item?._id}/>
               </div>
               <div className="mt-4 space-y-2">
                 <Link href={`/products/${item?._id}`}><h3 className="font-semibold text-lg line-clamp-2">{item?.title}</h3></Link>
