@@ -1,33 +1,51 @@
 "use client"
 
-import { onAuthStateChanged } from "firebase/auth";
-import { createContext, useContext, useEffect, useState } from "react"
-import { auth } from "../lib/firestore/firebase";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const AuthContext = createContext();
+// 1. Create context with default values
+const AuthContext = createContext({
+  user: null,
+  isLoading: true,
+});
 
-export default function AuthoContextProvider({ children }) {
-    const [user, setUser] = useState(undefined);
+// 2. Provider component
+export default function AuthContextProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-            } else {
-                setUser(null);
-            }
-        })
-        return () => unsub();
-    }, [])
+  useEffect(() => {
+    async function fetchCurrentUser() {
+      try {
+        const res = await fetch("/api/currentuser");
+        if (!res.ok) {
+          setUser(null);
+        } else {
+          const { data } = await res.json();
+          setUser(data);
+          console.log("The auth context data", data)
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchCurrentUser();
+  }, []);
 
-    return <AuthContext.Provider
-        value={{
-            user,
-            isLoading: user === undefined,
-        }}
-    >
-        {children}
+  return (
+    <AuthContext.Provider value={{ user, isLoading }}>
+      {children}
     </AuthContext.Provider>
+  );
 }
 
-export const useAuth = () => useContext(AuthContext);
+// 3. Custom hook
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthContextProvider");
+  }
+  return context;
+}

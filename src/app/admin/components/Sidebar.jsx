@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import toast from "react-hot-toast"
 import { auth } from "../../../../lib/firestore/firebase"
+import LogoutButton from "../../components/LogOut"
 
 export default function Sidebar() {
     const menuList = [{
@@ -52,7 +53,7 @@ export default function Sidebar() {
         link: "/admin/admins"
     },
     ]
-    return <section className="sticky top-0 bg-white h-screen px-5 py-3 overflow-hidden w-[290px] flex flex-col gap-5 shadow-xl">
+    return <section className="sticky top-0 z-5000 bg-white h-screen px-5 py-3 overflow-hidden w-[290px] flex flex-col gap-5 shadow-xl">
         <div className="flex gap-3 pb-3 pt-4 justify-center">
             <img src="/logo-removebg-preview.png" alt="loho" className="h-7" />
             <h1 className="font-bold text-2xl">TRIGGER</h1>
@@ -63,19 +64,8 @@ export default function Sidebar() {
             })}
         </div>
         <div className="flex justify-center hover:bg-red-600 hover:text-white py-2 rounded-lg">
-            <button
-             onClick={async()=>{
-                try {
-                    await toast.promise(signOut(auth),{
-                        error:(e) => e?.message,
-                        loading: 'Signing out',
-                        success: 'Signed out Successfully!!'
-                    })
-                } catch (error) {
-                    toast.error(error?.message);
-                }
-             }}
-             className="flex justify-center items-center gap-3"> <LogOut /> Logout</button>
+          
+             <h1 className="flex items-center"><LogoutButton/> Logout</h1>
         </div>
     </section>
 }

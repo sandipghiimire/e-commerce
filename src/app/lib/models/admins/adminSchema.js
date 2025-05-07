@@ -22,6 +22,9 @@ const adminSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    cart: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }
+      ],
     image: { type: String, required: true }
 });
 

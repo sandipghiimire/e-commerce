@@ -42,7 +42,7 @@ export default function AdminLayout({ children }) {
         </div>
         <section className="flex-1 flex flex-col min-h-screen overflow-hidden">
             <Header toggleSidebar={toggleSidebar} />
-            <section className="pt-15 flex-1 bg-slate-100">{children}</section>
+            <section className="pt-20 flex-1 bg-slate-100">{children}</section>
         </section>
     </main>
 }
