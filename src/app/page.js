@@ -17,7 +17,7 @@ export default function Home() {
         <Collections />
         <Categories />
         <ProductList/>
-        <Testimonials/>
+        {/* <Testimonials/> */}
         <Footer/>
     </div>
   );
