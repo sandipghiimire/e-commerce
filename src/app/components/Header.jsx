@@ -11,6 +11,8 @@ export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const { user } = useAuth();
   const dropdownRef = useRef(null);
   const searchRef = useRef(null);
@@ -19,28 +21,51 @@ export default function Header() {
     { name: "Home", link: "/" },
     { name: "Products", link: "/products" },
     { name: "Categories", link: "/categories", submenu: [
-      { name: "Electronics", link: "/categories/electronics" },
+      { name: "Shoes", link: "/categories/shoes" },
       { name: "Clothing", link: "/categories/clothing" },
-      { name: "Home & Kitchen", link: "/categories/home" },
+      // { name: "Home & Kitchen", link: "/categories/home" },
       { name: "Beauty", link: "/categories/beauty" },
     ]},
-    { name: "About", link: "/about" },
+    // { name: "About", link: "/about" },
     { name: "Contact", link: "/contact" },
   ];
 
-  // Handle scroll effect
+  // Handle scroll effect with hide/show logic
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
+      const currentScrollY = window.scrollY;
+      
+      // Always show header at top of page
+      if (currentScrollY <= 10) {
         setScrolled(false);
+        setHidden(false);
+      } else {
+        setScrolled(true);
+        
+        // Hide when scrolling down past 30px
+        if (currentScrollY > lastScrollY && currentScrollY > 30) {
+          setHidden(true);
+        } 
+        // Show when scrolling up past 35px
+        else if (currentScrollY < lastScrollY && currentScrollY > 35) {
+          setHidden(false);
+        }
       }
+      setLastScrollY(currentScrollY);
     };
     
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
+
+  // Close all menus when header is hidden
+  useEffect(() => {
+    if (hidden) {
+      setIsOpen(false);
+      setIsSearchOpen(false);
+      setIsDropdownOpen(false);
+    }
+  }, [hidden]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -60,6 +85,8 @@ export default function Header() {
   return (
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        hidden ? '-translate-y-full' : 'translate-y-0'
+      } ${
         scrolled 
           ? "bg-white shadow-lg py-2" 
           : "bg-gradient-to-r from-blue-900 to-indigo-900 py-4"
